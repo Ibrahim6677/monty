@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,6 +46,25 @@ void openfile(char *fname);
 int parseline(char *buff, int idx, int format);
 void fileread(FILE *);
 void Function_selection(char *, char *, int, int);
-void call_fun(op_func, char *, char *, int, int);
-
+void callfun(op_func, char *, char *, int, int);
+void error(int errorcode, ...);
+void stringerror(int errorcode, ...);
+void more_error(int code, ...);
+stack_t *createnode(int n);
+void fnodes(void);
+void add_to_queue(stack_t **newnode, __attribute__((unused))unsigned int len);
+void mul(stack_t **stack, unsigned int idx);
+void mod(stack_t **stack, unsigned int idx);
+void printstack(stack_t **stack, unsigned int idx);
+void pop(stack_t **stack, unsigned int idx);
+void printtop(stack_t **stack, unsigned int idx);
+void no_op(stack_t **stack, unsigned int idx);
+void swap(stack_t **stack, unsigned int idx);
+void sadd(stack_t **stack, unsigned int idx);
+void ssub(stack_t **stack, unsigned int idx);
+void sdiv(stack_t **stack, unsigned int idx);
+void printc(stack_t **stack, unsigned int idx);
+void prints(stack_t **stack, __attribute__((unused))unsigned int len);
+void rotleft(stack_t **stack, __attribute__((unused))unsigned int len);
+void rotright(stack_t **stack, __attribute__((unused))unsigned int len);
 #endif

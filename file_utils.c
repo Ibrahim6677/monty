@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * Function_selection - select function from available functions list.
@@ -14,36 +14,36 @@ void Function_selection(char *cmd, char *arg, int format, int idx)
 	int flag;
 
 	instruction_t funcs_list[] = { 
-		{"push", add_to_stack},
-		{"pall", print_stack},
-		{"pint", print_top},
-		{"pop", pop_top},
-		{"nop", nop},
-		{"swap", swap_nodes},
-		{"add", add_nodes},
-		{"sub", sub_nodes},
-		{"div", div_nodes},
-		{"mul", mul_nodes},
-		{"mod", mod_nodes},
-		{"pchar", print_char},
-		{"pstr", print_str},
-		{"rotl", rotl},
-		{"rotr", rotr},
+		{"push", sadd},
+		{"pall", printstack},
+		{"pint", printtop},
+		{"pop", pop},
+		{"nop", no_op},
+		{"swap", swap},
+		{"add", sadd},
+		{"sub", ssub},
+		{"div", sdiv},
+		{"mul", mul},
+		{"mod", mod},
+		{"pchar", printc},
+		{"pstr", prints},
+		{"rotl", rotleft},
+		{"rotr", rotright},
 		{NULL, NULL}
 	};
 	
 	if (cmd[0] == '#')
 		return;
-	for (flag = 1, i = 0; funcs_list[i].cmd != NULL; i++)
+	for (flag = 1, i = 0; funcs_list[i].opcode != NULL; i++)
 	{
-		if (strcmp(cmd, funcs_list[i].cmd) == 0)
+		if (strcmp(cmd, funcs_list[i].opcode) == 0)
 		{
-			call_fun(funcs_list[i].f, cmd, arg, idx, format);
+			callfun(funcs_list[i].f, cmd, arg, idx, format);
 			flag = 0;
 		}
 	}
 	if (flag == 1)
-		error(3, ln, opcode);
+		error(3, idx, cmd);
 }
 
 /**
@@ -83,7 +83,7 @@ int parseline(char *buff, int idx, int format)
 		error(4);
 
 	cmd = strtok(buff, delim);
-	if (opcode == NULL)
+	if (cmd == NULL)
 		return (format);
 	arg = strtok(NULL, delim);
 
@@ -93,7 +93,7 @@ int parseline(char *buff, int idx, int format)
 		return (1);
 
 	Function_selection(cmd, arg, format, idx);
-											return (format);
+	return (format);
 }
 
 /**
@@ -113,16 +113,16 @@ void openfile(char *fname)
 }
 
 /**
- *  * call_fun - Calls the required function.
- *   * @func: Pointer to the function that is about to be called.
- *    * @op: string representing the opcode.
- *     * @val: string representing a numeric value.
- *      * @ln: line numeber for the instruction.
- *       * @format: Format specifier. If 0 Nodes will be entered as a stack.
- *        * if 1 nodes will be entered as a queue.
- *         */
+ * callfun - Calls the required function.
+ * @func: Pointer to the function that is about to be called.
+ * @op: string representing the opcode.
+ * @val: string representing a numeric value.
+ * @ln: line numeber for the instruction.
+ * @format: Format specifier. If 0 Nodes will be entered as a stack.
+ * if 1 nodes will be entered as a queue.
+ */
 
-void call_fun(op_func func, char *op, char *val, int ln, int format)
+void callfun(op_func func, char *op, char *val, int ln, int format)
 {
 	stack_t *node;
 	int flag;
@@ -143,7 +143,7 @@ void call_fun(op_func func, char *op, char *val, int ln, int format)
 			if (isdigit(val[i]) == 0)
 				error(5, ln);
 		}
-		node = create_node(atoi(val) * flag);
+		node = createnode(atoi(val) * flag);
 		if (format == 0)
 			func(&node, ln);
 		if (format == 1)
