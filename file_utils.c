@@ -13,7 +13,7 @@ void Function_selection(char *cmd, char *arg, int idx, int format)
 	int i;
 	int flag;
 
-	instruction_t funcs_list[] = { 
+	instruction_t funcs_list[] = {
 		{"push", add_new_stack},
 		{"pall", printstack},
 		{"pint", printtop},
@@ -31,7 +31,6 @@ void Function_selection(char *cmd, char *arg, int idx, int format)
 		{"rotr", rotright},
 		{NULL, NULL}
 	};
-	
 	if (cmd[0] == '#')
 		return;
 	for (flag = 1, i = 0; funcs_list[i].opcode != NULL; i++)

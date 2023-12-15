@@ -2,7 +2,7 @@
 
 /**
  * error - Prints appropiate error messages determined by their error code.
- * @error_code: The error codes
+ * @errorcode: The error codes
  */
 
 void error(int errorcode, ...)
@@ -41,7 +41,7 @@ void error(int errorcode, ...)
 
 /**
  * stringerror - handles errors.
- * @error_code: The error codes.
+ * @errorcode: The error codes.
  */
 
 void stringerror(int errorcode, ...)
@@ -69,7 +69,7 @@ void stringerror(int errorcode, ...)
 
 /**
  * more_error - handles errors.
- * @error_code: The error codes
+ * @code: The error codes
  */
 void more_error(int code, ...)
 {
