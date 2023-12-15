@@ -43,7 +43,7 @@ extern stack_t *head;
 typedef void (*op_func)(stack_t **, unsigned int);
 
 void openfile(char *);
-int parseline(char *, int , int );
+int parseline(char *, int, int);
 void fileread(FILE *);
 void Function_selection(char *, char *, int, int);
 void callfun(op_func, char *, char *, int, int);
