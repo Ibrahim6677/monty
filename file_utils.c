@@ -8,13 +8,13 @@
  * @idx: line index
  */
 
-void Function_selection(char *cmd, char *arg, int format, int idx)
+void Function_selection(char *cmd, char *arg, int idx, int format)
 {
 	int i;
 	int flag;
 
 	instruction_t funcs_list[] = { 
-		{"push", sadd},
+		{"push", add_new_stack},
 		{"pall", printstack},
 		{"pint", printtop},
 		{"pop", pop},
@@ -92,7 +92,7 @@ int parseline(char *buff, int idx, int format)
 	if (strcmp(cmd, "queue") == 0)
 		return (1);
 
-	Function_selection(cmd, arg, format, idx);
+	Function_selection(cmd, arg, idx, format);
 	return (format);
 }
 
